@@ -4,7 +4,11 @@ const db = config.get('mongoURL');
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(db, { useCreateIndex:true,useNewUrlParser: true });
+    await mongoose.connect(db, {
+      useCreateIndex: true,
+      useNewUrlParser: true,
+      useFindAndModify: false
+    });
     console.log('Atlas Connected');
   } catch (error) {
     console.error(error.message);
