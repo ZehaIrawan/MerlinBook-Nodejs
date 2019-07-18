@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import axios from 'axios'
+
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -22,25 +22,7 @@ const Register = () => {
     if (password !== password2) {
       console.log('Password not matach');
     } else {
-    const newUser = {
-      name,
-      email,
-      password
-    }
-
-    try {
-      const config = {
-        headers:{
-          'Content-Type': 'application/json'
-        }
-      }
-
-      const body = JSON.stringify(newUser)
-
-      const res = await axios.post()
-    } catch (err) {
-      
-    }
+      console.log('Success')
     }
   };
 
