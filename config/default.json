@@ -1,4 +1,0 @@
-{
-  "mongoURL": "mongodb+srv://zeha123:zeha123@merlinbook-ewwmk.mongodb.net/merlinbook-nodejs?retryWrites=true&w=majority",
-  "jwtSecret": "secret"
-}
