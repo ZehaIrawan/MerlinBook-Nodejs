@@ -1,17 +1,18 @@
 const mongoose = require('mongoose');
-const config = require('config');
-const db = config.get('mongoURL');
+require('dotenv').config();
+
+const db = process.env.mongo_connect;
 
 const connectDB = async () => {
   try {
     await mongoose.connect(db, {
-      useCreateIndex: true,
       useNewUrlParser: true,
-      useFindAndModify: false
+      useCreateIndex: true,
+      useFindAndModify: false,
     });
-    console.log('Atlas Connected');
-  } catch (error) {
-    console.error(error.message);
+    console.log('MongoDB connected');
+  } catch (err) {
+    console.error(err.message);
     // Exit process with failure
     process.exit(1);
   }

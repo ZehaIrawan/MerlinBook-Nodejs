@@ -1,9 +1,10 @@
 {
-  "name": "merlinbook-backend-nodejs",
+  "name": "bookstore",
   "version": "1.0.0",
-  "description": "backend api for merlinbook using nodejs",
-  "main": "server.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
     "server": "nodemon server",
     "client": "npm start --prefix client",
@@ -11,26 +12,28 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JangkarBumi/merlinbook-backend-nodejs.git"
+    "url": "git+https://github.com/JangkarBumi/bookstore.git"
   },
-  "author": "Zeha Irawan",
-  "license": "MIT",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JangkarBumi/merlinbook-backend-nodejs/issues"
+    "url": "https://github.com/JangkarBumi/bookstore/issues"
   },
-  "homepage": "https://github.com/JangkarBumi/merlinbook-backend-nodejs#readme",
+  "homepage": "https://github.com/JangkarBumi/bookstore#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.2.2",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.1.1",
+    "gravatar": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.6.8",
+    "request": "^2.88.0"
+  },
   "devDependencies": {
     "concurrently": "^4.1.1",
     "nodemon": "^1.19.1"
-  },
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "config": "^3.1.0",
-    "express": "^4.17.1",
-    "express-validator": "^5.3.1",
-    "gravatar": "^1.8.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.6.4",
-    "request": "^2.88.0"
   }
 }
