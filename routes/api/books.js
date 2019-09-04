@@ -100,6 +100,7 @@ router.get('/:id', auth, async (req, res) => {
 // @desc     Delete a book
 // @access   Private
 router.delete('/:id', auth, async (req, res) => {
+  console.log(req);
   try {
     const book = await Book.findById(req.params.id);
 
@@ -124,18 +125,30 @@ router.delete('/:id', auth, async (req, res) => {
   }
 });
 
-// @route    POST api/books/comment/:id
-// @desc     Comment on a book
+// @route    PUT api/book/:d
+// @desc     Update book data
 // @access   Private
-router.post(
-  '/comment/:id',
+router.put(
+  '/:id',
   [
     auth,
     [
-      check('text', 'Text is required')
+      check('title', 'Title is required')
         .not()
-        .isEmpty()
-    ]
+        .isEmpty(),
+      check('category', 'Category is required')
+        .not()
+        .isEmpty(),
+      check('author', 'Author is required')
+        .not()
+        .isEmpty(),
+      check('totalChapter', 'TotalChapter is required')
+        .not()
+        .isEmpty(),
+      check('currentChapter', 'currentChapter is required')
+        .not()
+        .isEmpty(),
+    ],
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -143,64 +156,33 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
+    const updatedData = {
+      title: req.body.title,
+      category: req.body.category,
+      author: req.body.author,
+      totalChapter: req.body.totalChapter,
+      currentChapter: req.body.currentChapter,
+    };
+
     try {
-      const user = await User.findById(req.user.id).select('-password');
-      const book = await Book.findById(req.params.id);
+      const book = await Book.findOne({ _id: req.params.id });
 
-      const newComment = {
-        text: req.body.text,
-        name: user.name,
-        avatar: user.avatar,
-        user: req.user.id
-      };
 
-      book.comments.unshift(newComment);
+      const result = Object.assign(book, updatedData);
 
-      await book.save();
+      console.log(book);
+      await Book.findByIdAndUpdate(
+        req.params.id,
+        { $set: result },
+        { new: true },
+      );
 
-      res.json(book.comments);
+      res.json(result);
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
     }
-  }
+  },
 );
-// @route    DELETE api/books/comment/:id/:comment_id
-// @desc     Delete comment
-// @access   Private
-router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
-  try {
-    const book = await Book.findById(req.params.id);
-
-    // Pull out comment
-    const comment = book.comments.find(
-      comment => comment.id === req.params.comment_id
-    );
-
-    // Make sure comment exists
-    if (!comment) {
-      return res.status(404).json({ msg: 'Comment does not exist' });
-    }
-
-    // Check user
-    if (comment.user.toString() !== req.user.id) {
-      return res.status(401).json({ msg: 'User not authorized' });
-    }
-
-    // Get remove index
-    const removeIndex = book.comments
-      .map(comment => comment.id)
-      .indexOf(req.params.comment_id);
-
-    book.comments.splice(removeIndex, 1);
-
-    await book.save();
-
-    res.json(book.comments);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
-  }
-});
 
 module.exports = router;
