@@ -125,7 +125,7 @@ router.delete('/:id', auth, async (req, res) => {
   }
 });
 
-// @route    PUT api/book/:d
+// @route    PUT api/book/:id
 // @desc     Update book data
 // @access   Private
 router.put(
