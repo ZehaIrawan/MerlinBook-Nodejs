@@ -5,6 +5,20 @@
 * Authentication
 * CRUD operation for books
 
+Endpoints
+
+## Use HTTP methods to operate on collections and entities
+
+There is one single rule concerning operations performed on collections and entities - **Use [HTTP methods](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html)**
+
+You can operate on resources using HTTP methods such as `POST`, `GET`, `PUT`, and `DELETE` -
+to remember them, refer to the CRUD acronym (Create-Read-Update-Delete).
+
+| Resource / HTTP method | POST (create)    | GET (read)  | PUT (update)           | DELETE (delete)    |
+| ---------------------- | ---------------- | ----------- | ---------------------- | ------------------ |
+| /api/users              | Create new user  |   |              |             | Delete a user
+| /api/books        | Create new book  | Get a book data |update a book | Delete a book
+
 
 ```bash
 # Install dependencies
